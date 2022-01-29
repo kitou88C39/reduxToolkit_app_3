@@ -25,10 +25,16 @@ const Login = ({ history }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleSubmit = (event) => {
+  // const handleSubmit = (event) => {
+  //   event.preventDefault();
+  //   login(email, password, navigate);
+  // };
+
+  //非同期
+  async function handleSubmit(event) {
     event.preventDefault();
-    login(email, password, navigate);
-  };
+    await login(email, password, navigate);
+  }
 
   return (
     <div className="wrapper">
