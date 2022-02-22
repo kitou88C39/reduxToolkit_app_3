@@ -35,6 +35,19 @@ const Todos = (props) => {
     setCount(count - num);
   };
 
+  const firestore = useFirestore();
+  const addTodo = ()=> {
+  return firestore.add("addTodo", {
+    idCount: 1,
+    item: todo,
+    completed: false,
+    balance: 0,
+  });
+  useFirestoreConnect({
+   collection: "addTodo",
+   where: [["todo", "false", "0"]],
+  });
+
   const add = () => {
     if (todo === "") {
       alert("Input is Empty");

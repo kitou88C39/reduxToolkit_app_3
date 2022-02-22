@@ -1,3 +1,8 @@
+//addTodos　受取人
+//comment 未完了の受取人
+//count 送金者の残高
+//num　送金者の入金及び出勤額
+//balance 受取人の残高
 import React, { useState } from "react";
 import { connect } from "react-redux";
 import { addTodos, removeTodos, updateTodos } from "../redux/reducer";

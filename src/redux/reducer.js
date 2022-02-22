@@ -1,24 +1,25 @@
+//import { async } from "@firebase/util";
+//import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { createSlice } from "@reduxjs/toolkit";
+//import { db } from "../firebase";
+//const firestore = useFirestore();
 
-//ログインユーザーが自身の口座に入出金する
-export const counterSlice = createSlice({
-  name: "currentUser",
-  initialState: {
-    count: 0,
-  },
-  reducers: {
-    increase: (state) => {
-      state.count += num;
-    },
-    decrease: (state) => {
-      state.count -= num;
-    },
-  },
-});
+//const add = () => {
+//return firestore.add("addTodo", {
+//idCount: 1,
+//item: todo,
+//completed: false,
+//balance: 0,
+//});
+//useFirestoreConnect({
+//collection: "addTodo",
+//where: [["todo", "false", "0"]],
+//});
 
 const initialState = {
-  idCount: 1,
-  todos: [{ id: 1, name: "addTodos", money: "balance" }],
+  todos: [],
+  //idCount: 1,
+  //Receiver: [{ id: "", name: "", money: "" }],
 };
 
 const addTodoReducer = createSlice({
@@ -42,23 +43,22 @@ const addTodoReducer = createSlice({
       };
     },
     //todoを更新
-    // updateTodos: (state, action) => {
-    //   return {
-    //     ...state,
-    //     todos: state?.todos?.map((todo) => {
-    //       if (todo.id === action.payload.id) {
-    //         return {
-    //           ...todo,
-    //           balance: action.payload.balance,
-    //         };
-    //       }
-    //       return todo;
-    //     }),
-    // };
-    // },
+    updateTodos: (state, action) => {
+      return {
+        ...state,
+        todos: state?.todos?.map((todo) => {
+          if (todo.id === action.payload.id) {
+            return {
+              ...todo,
+              balance: action.payload.balance,
+            };
+          }
+          return todo;
+        }),
+      };
+    },
   },
 });
 
-export const { increase, decrease } = counterSlice.actions;
 export const { addTodos, removeTodos, updateTodos } = addTodoReducer.actions;
 export const reducer = addTodoReducer.reducer;
