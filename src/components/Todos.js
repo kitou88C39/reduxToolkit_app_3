@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import { addTodos } from "../redux/reducer";
 import { Box, TextField, Button } from "@mui/material";
 import { AuthContext } from "../auth/AuthProvider";
+import { useFirestoreConnect, useFirestore } from "react-redux-firebase";
 
 const mapStateToProps = (state) => {
   return {
@@ -36,16 +37,17 @@ const Todos = (props) => {
   };
 
   const firestore = useFirestore();
-  const addTodo = ()=> {
-  return firestore.add("addTodo", {
-    idCount: 1,
-    item: todo,
-    completed: false,
-    balance: 0,
-  });
+  const addTodo = () => {
+    return firestore.add("addTodo", {
+      idCount: 1,
+      item: todo,
+      completed: false,
+      balance: 0,
+    });
+  };
   useFirestoreConnect({
-   collection: "addTodo",
-   where: [["todo", "false", "0"]],
+    collection: "addTodo",
+    where: [["todo", "==", "0"]],
   });
 
   const add = () => {
