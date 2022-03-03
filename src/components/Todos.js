@@ -29,14 +29,32 @@ const Todos = (props) => {
   };
 
   const [num, setNum] = useState(100);
+
+  const firestore = useFirestore();
   const onCountUp = () => {
     setCount(count + num);
+    return firestore.add("displayName", {
+      idCount: 1,
+      item: todo,
+      completed: false,
+      count: 0,
+    });
   };
   const onCountDown = () => {
     setCount(count - num);
+    return firestore.add("displayName", {
+      idCount: 1,
+      item: todo,
+      completed: false,
+      count: 0,
+    });
   };
+  useFirestoreConnect({
+    collection: "addTodo",
+    where: [["text", "==", "0"]],
+  });
 
-  const firestore = useFirestore();
+  //const firestore = useFirestore();
   const addTodo = () => {
     return firestore.add("addTodo", {
       idCount: 1,
