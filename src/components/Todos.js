@@ -33,25 +33,25 @@ const Todos = (props) => {
   const firestore = useFirestore();
   const onCountUp = () => {
     setCount(count + num);
-    return firestore.add("displayName", {
+    return firestore.add("senders", {
       idCount: 1,
       item: todo,
-      completed: false,
+      //completed: false,
       count: 0,
     });
   };
   const onCountDown = () => {
     setCount(count - num);
-    return firestore.add("displayName", {
+    return firestore.add("senders", {
       idCount: 1,
       item: todo,
-      completed: false,
+      //completed: false,
       count: 0,
     });
   };
   useFirestoreConnect({
-    collection: "addTodo",
-    where: [["text", "==", "0"]],
+    collection: "senders",
+    where: [["todo", "==", "0"]],
   });
 
   //const firestore = useFirestore();

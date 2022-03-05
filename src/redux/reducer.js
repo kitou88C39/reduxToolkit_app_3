@@ -4,22 +4,8 @@ import { createSlice } from "@reduxjs/toolkit";
 //import { db } from "../firebase";
 //const firestore = useFirestore();
 
-//const add = () => {
-//return firestore.add("addTodo", {
-//idCount: 1,
-//item: todo,
-//completed: false,
-//balance: 0,
-//});
-//useFirestoreConnect({
-//collection: "addTodo",
-//where: [["todo", "false", "0"]],
-//});
-
 const initialState = {
   todos: [],
-  //idCount: 1,
-  //Receiver: [{ id: "", name: "", money: "" }],
 };
 
 const addTodoReducer = createSlice({
