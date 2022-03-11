@@ -1,4 +1,3 @@
-//import React, { useContext, useEffect, useState } from "react";
 import React, { useContext, useState } from "react";
 import { connect } from "react-redux";
 import { addTodos } from "../redux/reducer";
@@ -29,14 +28,21 @@ const Todos = (props) => {
   };
 
   const [num, setNum] = useState(100);
+  // const onCountUp = () => {
+  //   setCount(count + num);
+  // };
+  // const onCountDown = () => {
+  //   setCount(count - num);
+  // };
 
   const firestore = useFirestore();
+
   const onCountUp = () => {
     setCount(count + num);
     return firestore.add("senders", {
       idCount: 1,
-      item: todo,
-      //completed: false,
+      displayName: currentUser,
+      completed: false,
       count: 0,
     });
   };
@@ -44,17 +50,18 @@ const Todos = (props) => {
     setCount(count - num);
     return firestore.add("senders", {
       idCount: 1,
-      item: todo,
-      //completed: false,
+      displayName: currentUser,
+      completed: false,
       count: 0,
     });
   };
   useFirestoreConnect({
     collection: "senders",
-    where: [["todo", "==", "0"]],
+    doc: "KNuZBcE97m1r5lreDcSi",
+    //where: [["currentUser", "==", "0"]],
   });
-
   //const firestore = useFirestore();
+
   const addTodo = () => {
     return firestore.add("addTodo", {
       idCount: 1,
@@ -148,5 +155,4 @@ const Todos = (props) => {
   );
 };
 
-//export default Todos;
 export default connect(mapStateToProps, mapDispatchToProps)(Todos);

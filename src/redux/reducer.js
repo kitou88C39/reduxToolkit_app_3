@@ -1,12 +1,23 @@
-//import { async } from "@firebase/util";
-//import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { createSlice } from "@reduxjs/toolkit";
-//import { db } from "../firebase";
-//const firestore = useFirestore();
 
 const initialState = {
   todos: [],
 };
+// export const userSlice = createSlice({
+//   name: "senders",
+//   initialState: {
+//     count: 0,
+//     user: null,
+//   },
+//   reducers: {
+//     login: (state, action) => {
+//       state.user = action.payload;
+//     },
+//     logout: (state) => {
+//       state.user = null;
+//     },
+//   },
+// });
 
 const addTodoReducer = createSlice({
   name: "todos",
@@ -45,6 +56,8 @@ const addTodoReducer = createSlice({
     },
   },
 });
-
+//export const { login, logout } = userSlice.actions;
+//export const selectUser = (state) => state.user.user;
+//export default userSlice.reducer;
 export const { addTodos, removeTodos, updateTodos } = addTodoReducer.actions;
 export const reducer = addTodoReducer.reducer;
