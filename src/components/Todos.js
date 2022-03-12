@@ -57,8 +57,8 @@ const Todos = (props) => {
   };
   useFirestoreConnect({
     collection: "senders",
-    doc: "KNuZBcE97m1r5lreDcSi",
-    //where: [["currentUser", "==", "0"]],
+    //doc: "KNuZBcE97m1r5lreDcSi",
+    where: [["currentUser", "==", "0"]],
   });
   //const firestore = useFirestore();
 
