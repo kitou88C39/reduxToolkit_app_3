@@ -1,9 +1,11 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { connect } from "react-redux";
 import { addTodos } from "../redux/reducer";
 import { Box, TextField, Button } from "@mui/material";
 import { AuthContext } from "../auth/AuthProvider";
 import { useFirestoreConnect, useFirestore } from "react-redux-firebase";
+//import db from "../firebase";
+//import { collection, onSnapshot } from "firebase/firestore";
 
 const mapStateToProps = (state) => {
   return {
@@ -28,39 +30,64 @@ const Todos = (props) => {
   };
 
   const [num, setNum] = useState(100);
-  // const onCountUp = () => {
-  //   setCount(count + num);
-  // };
-  // const onCountDown = () => {
-  //   setCount(count - num);
-  // };
-
-  const firestore = useFirestore();
 
   const onCountUp = () => {
     setCount(count + num);
-    return firestore.add("senders", {
-      idCount: 1,
-      displayName: currentUser,
-      completed: false,
-      count: 0,
-    });
   };
+
   const onCountDown = () => {
     setCount(count - num);
-    return firestore.add("senders", {
-      idCount: 1,
-      displayName: currentUser,
-      completed: false,
-      count: 0,
-    });
   };
-  useFirestoreConnect({
-    collection: "senders",
-    //doc: "KNuZBcE97m1r5lreDcSi",
-    where: [["currentUser", "==", "0"]],
-  });
+
+  //追加したコード①
+  // const [senders, setSenders] = useState([]);
+  // useEffect(
+  //   () =>
+  //     onSnapshot(collection(db, "senders"), (snapshot) =>
+  //       setSenders(snapshot.docs.map((doc) => doc.data()))
+  //     ),
+  //   []
+  // );
+  //追加したコード②
+  // useEffect(() => {
+  //   db.collection("senders")
+  //     .orderBy("completed", "balance", "todo")
+  //     .onSnapshot((snapshot) =>
+  //       setCount(
+  //         snapshot.docs.map((doc) => ({
+  //           id: doc.id,
+  //           senders: doc.data(),
+  //         }))
+  //       )
+  //     );
+  // });
+
   //const firestore = useFirestore();
+
+  // const onCountUp = () => {
+  //   setCount(count + num);
+  //   return firestore.add("senders", {
+  //     idCount: 1,
+  //     displayName: currentUser,
+  //     completed: false,
+  //     count: 0,
+  //   });
+  // };
+  // const onCountDown = () => {
+  //   setCount(count - num);
+  //   return firestore.add("senders", {
+  //     idCount: 1,
+  //     displayName: currentUser,
+  //     completed: false,
+  //     count: 0,
+  //   });
+  // };
+  // useFirestoreConnect({
+  //   collection: "senders",
+  //doc: "KNuZBcE97m1r5lreDcSi",
+  //   where: [["currentUser", "==", "0"]],
+  // });
+  const firestore = useFirestore();
 
   const addTodo = () => {
     return firestore.add("addTodo", {

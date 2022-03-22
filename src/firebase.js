@@ -1,6 +1,7 @@
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
+//import { getFirestore, collection, getDocs } from "firebase/firestore";
 
 const firebaseConfig = {
   apiKey: "AIzaSyBEqz-K-CIG8soT0e37DmgVfpPJ8rN04QM",
@@ -12,13 +13,22 @@ const firebaseConfig = {
   //measurementId: "KNuZBcE97m1r5lreDcSi",
 };
 
-//const app = initializeApp(firebaseConfig);
-//export const db = getFirestore();
-//export const auth = getAuth();
-
-//export default app;
-
 export const firebaseApp = initializeApp(firebaseConfig);
 export const auth = getAuth(firebaseApp);
 export const firestore = getFirestore(firebaseApp);
 export const db = getFirestore(firebaseApp);
+
+// initializeApp(firebaseConfig);
+// export const auth = getAuth();
+// export const db = getFirestore();
+// export const colRef = collection(db, "senders");
+// getDocs(colRef).then((shapshot) => {
+//   const senders = [];
+//   snapshot.docs.forEach((doc) => {
+//     book.push({ ...doc.data(), id: doc.id });
+//   });
+//   console.log(books)
+// });
+//   .catch(err => {
+//     console.log(err.messate)
+// });
