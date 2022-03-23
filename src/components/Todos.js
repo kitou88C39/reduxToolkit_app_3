@@ -4,8 +4,11 @@ import { addTodos } from "../redux/reducer";
 import { Box, TextField, Button } from "@mui/material";
 import { AuthContext } from "../auth/AuthProvider";
 import { useFirestoreConnect, useFirestore } from "react-redux-firebase";
-//import db from "../firebase";
+import { db } from "../firebase";
+//import { collection, addDoc } from "firebase/firestore";
+
 //import { collection, onSnapshot } from "firebase/firestore";
+//import { getFirestore, collection } from "firebase/firestore";
 
 const mapStateToProps = (state) => {
   return {
@@ -38,6 +41,14 @@ const Todos = (props) => {
   const onCountDown = () => {
     setCount(count - num);
   };
+  // イメージ (someReducerはaddTodosなどのReducerのイメージ)
+  //import { soemReducer } from '../redux/reducer'
+
+  //const db = getFirestore();
+  //const snapshot = await getDocs(collection(db, "senders"));
+  //snapshot.forEach((doc) => {
+  //dispatch(addTodos(doc.data()));
+  //});
 
   //追加したコード①
   // const [senders, setSenders] = useState([]);
@@ -49,18 +60,43 @@ const Todos = (props) => {
   //   []
   // );
   //追加したコード②
-  // useEffect(() => {
-  //   db.collection("senders")
-  //     .orderBy("completed", "balance", "todo")
-  //     .onSnapshot((snapshot) =>
-  //       setCount(
-  //         snapshot.docs.map((doc) => ({
-  //           id: doc.id,
-  //           senders: doc.data(),
-  //         }))
-  //       )
-  //     );
-  // });
+
+  useEffect(() => {
+    db.collection("senders")
+      .orderBy("displayName", "completed", "count")
+      .onSnapshot((snapshot) =>
+        setCount(
+          snapshot.docs.map((doc) => ({
+            id: doc.id,
+            senders: doc.data(),
+          }))
+        )
+      );
+  });
+  //追加したコード③
+  // try {
+  //   const docRef = await addDoc(collection(db, "senders"), {
+  //     displayName: "currentUser",
+  //     completed: "false",
+  //     count: 0,
+  //   });
+  //   console.log("KNuZBcE97m1r5lreDcSi ", docRef.id);
+  // } catch (e) {
+  //   console.error("Error adding document: ", e);
+  // }
+  //追加したコード④
+  // db.collection("senders")
+  //   .add({
+  //     displayName: "currentUser",
+  //     completed: "false",
+  //     count: 0,
+  //   })
+  //   .then(function (docRef) {
+  //     console.log("KNuZBcE97m1r5lreDcSi", docRef.id);
+  //   })
+  //   .catch(function (error) {
+  //     console.error("Error adding document: ", error);
+  //   });
 
   //const firestore = useFirestore();
 
