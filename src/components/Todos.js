@@ -5,10 +5,15 @@ import { Box, TextField, Button } from "@mui/material";
 import { AuthContext } from "../auth/AuthProvider";
 import { useFirestoreConnect, useFirestore } from "react-redux-firebase";
 import { db } from "../firebase";
-//import { collection, addDoc } from "firebase/firestore";
+//import { collection, getDocs } from "firebase/firestore";
+//import { addDoc, collection } from "firebase/firestore";
+//import { collection } from "firebase/firestore";
+//import { firestore } from "../firebase";
 
-//import { collection, onSnapshot } from "firebase/firestore";
+//import { doc, onSnapshot } from "firebase/firestore";
 //import { getFirestore, collection } from "firebase/firestore";
+//import { getDoc, addDoc, updateDoc } from "firebase/firestore";
+//import { getDocument, getCollection } from "~/plugins/firebase";
 
 const mapStateToProps = (state) => {
   return {
@@ -51,7 +56,7 @@ const Todos = (props) => {
   //});
 
   //追加したコード①
-  // const [senders, setSenders] = useState([]);
+  //const [senders, setSenders] = useState([]);
   // useEffect(
   //   () =>
   //     onSnapshot(collection(db, "senders"), (snapshot) =>
@@ -61,18 +66,23 @@ const Todos = (props) => {
   // );
   //追加したコード②
 
-  useEffect(() => {
-    db.collection("senders")
-      .orderBy("displayName", "completed", "count")
-      .onSnapshot((snapshot) =>
-        setCount(
-          snapshot.docs.map((doc) => ({
-            id: doc.id,
-            senders: doc.data(),
-          }))
-        )
-      );
-  });
+  // useEffect(() => {
+  //   console.log(("show db", db));
+  //   db.collection(db, "senders");
+
+  //   console
+  //     .log("senders", db)
+  //     .orderBy("displayName", "completed", "count")
+  //     .onSnapshot((snapshot) =>
+  //       setCount(
+  //         snapshot.docs.map((doc) => ({
+  //           id: doc.id,
+  //           senders: doc.data(),
+  //         }))
+  //       )
+  //     );
+  // });
+
   //追加したコード③
   // try {
   //   const docRef = await addDoc(collection(db, "senders"), {
@@ -85,18 +95,57 @@ const Todos = (props) => {
   //   console.error("Error adding document: ", e);
   // }
   //追加したコード④
-  // db.collection("senders")
-  //   .add({
-  //     displayName: "currentUser",
-  //     completed: "false",
-  //     count: 0,
-  //   })
-  //   .then(function (docRef) {
-  //     console.log("KNuZBcE97m1r5lreDcSi", docRef.id);
-  //   })
-  //   .catch(function (error) {
-  //     console.error("Error adding document: ", error);
+  useEffect(() => {
+    console.log(("show db", db));
+    db.collection(db, "senders")
+      .add({
+        displayName: "currentUser",
+        completed: "false",
+        count: 0,
+      })
+      .then(function (docRef) {
+        console.log("KNuZBcE97m1r5lreDcSi", docRef.id);
+      })
+      .catch(function (error) {
+        console.error("Error adding document: ", error);
+      });
+  });
+  //追加したコード⑤
+
+  // async function sample() {
+  //   // add
+  //   await addDoc(getCollection < IPost > "posts", {
+  //     title: "Camecon始めよう！",
   //   });
+  //   // read
+  //   const document = getDocument < IPost > "posts/1";
+  //   const snapshot = await getDoc(document);
+  //   // update
+  //   await updateDoc(document, { title: "https://camecon.me" });
+  // }
+  //追加したコード⑥
+  //const [senders, setSenders] = useState([]);
+
+  // useEffect(() => {
+  //   const usersCollectionRef = collection(db, "senders");
+  //   console.log(usersCollectionRef);
+  // }, []);
+  // useEffect(() => {
+  //   const userDocumentRef = doc(db, "senders", "KNuZBcE97m1r5lreDcSi ");
+  //   const unsub = onSnapshot(userDocumentRef, (documentSnapshot) => {
+  //     console.log(documentSnapshot.data());
+  //   });
+  //   return unsub;
+  // }, []);
+
+  //追加したコード⑦
+  // useEffect(() => {
+  //   const usersCollectionRef = collection(db, "senders");
+  //   getDocs(usersCollectionRef).then((querySnapshot) => {
+  //     setSenders(querySnapshot.docs.map((doc) => doc.data()));
+  //     querySnapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
+  //   });
+  // }, []);
 
   //const firestore = useFirestore();
 
