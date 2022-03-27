@@ -5,11 +5,20 @@ import { Box, TextField, Button } from "@mui/material";
 import { AuthContext } from "../auth/AuthProvider";
 import { useFirestoreConnect, useFirestore } from "react-redux-firebase";
 import { db } from "../firebase";
+import {
+  doc,
+  onSnapshot,
+  collection,
+  query,
+  //where,
+  //onSnapshot,
+} from "firebase/firestore";
+//import { collection } from "firebase/firestore";
+//import { database } from "../firebase";
+
+//import { firestore } from "../firebase";
 //import { collection, getDocs } from "firebase/firestore";
 //import { addDoc, collection } from "firebase/firestore";
-//import { collection } from "firebase/firestore";
-//import { firestore } from "../firebase";
-
 //import { doc, onSnapshot } from "firebase/firestore";
 //import { getFirestore, collection } from "firebase/firestore";
 //import { getDoc, addDoc, updateDoc } from "firebase/firestore";
@@ -68,7 +77,7 @@ const Todos = (props) => {
 
   // useEffect(() => {
   //   console.log(("show db", db));
-  //   db.collection(db, "senders");
+  //   collection(db, "senders");
 
   //   console
   //     .log("senders", db)
@@ -95,21 +104,21 @@ const Todos = (props) => {
   //   console.error("Error adding document: ", e);
   // }
   //追加したコード④
-  useEffect(() => {
-    console.log(("show db", db));
-    db.collection(db, "senders")
-      .add({
-        displayName: "currentUser",
-        completed: "false",
-        count: 0,
-      })
-      .then(function (docRef) {
-        console.log("KNuZBcE97m1r5lreDcSi", docRef.id);
-      })
-      .catch(function (error) {
-        console.error("Error adding document: ", error);
-      });
-  });
+  // useEffect(() => {
+  //   console.log(("show db", db));
+  //   collection(db, "senders")
+  //     .add({
+  //       displayName: "currentUser",
+  //       completed: "false",
+  //       count: 0,
+  //     })
+  //     .then(function (docRef) {
+  //       console.log("KNuZBcE97m1r5lreDcSi", docRef.id);
+  //     })
+  //     .catch(function (error) {
+  //       console.error("Error adding document: ", error);
+  //     });
+  // });
   //追加したコード⑤
 
   // async function sample() {
@@ -146,6 +155,18 @@ const Todos = (props) => {
   //     querySnapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
   //   });
   // }, []);
+  //追加したコード⑧
+  useEffect(() => {
+    console.log(("show db", db));
+    const setCount = query(collection(db, "senders"));
+    console.log(("show db", db));
+    const unsub = onSnapshot(setCount, (querySnapshot) => {
+      console.log(
+        "senders",
+        querySnapshot.docs.map((d) => doc.data())
+      );
+    });
+  }, []);
 
   //const firestore = useFirestore();
 
