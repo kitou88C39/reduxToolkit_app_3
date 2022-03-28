@@ -6,11 +6,11 @@ import { AuthContext } from "../auth/AuthProvider";
 import { useFirestoreConnect, useFirestore } from "react-redux-firebase";
 import { db } from "../firebase";
 import {
-  doc,
+  //doc,
   onSnapshot,
   collection,
   query,
-  //where,
+  where,
   //onSnapshot,
 } from "firebase/firestore";
 //import { collection } from "firebase/firestore";
@@ -158,15 +158,30 @@ const Todos = (props) => {
   //追加したコード⑧
   useEffect(() => {
     console.log(("show db", db));
-    const setCount = query(collection(db, "senders"));
+    const q = query(
+      collection(db, "senders")
+      //where("currentUser", "==", "0")
+    );
     console.log(("show db", db));
-    const unsub = onSnapshot(setCount, (querySnapshot) => {
+    const unsub = onSnapshot(q, (querySnapshot) => {
       console.log(
         "senders",
-        querySnapshot.docs.map((d) => doc.data())
+        querySnapshot.map((doc) => doc.data())
+        //querySnapshot.map((doc) => ({ ...doc.data(), id: doc.id }))
       );
     });
+    return unsub;
   }, []);
+
+  //追加したコード⑨
+  // const q = query(collection(db, "senders"), where("currentUser", "==", "0"));
+  // const unsubscribe = onSnapshot(q, (querySnapshot) => {
+  //   const senders = [];
+  //   querySnapshot.forEach((doc) => {
+  //     senders.push(doc.data().name);
+  //   });
+  //   console.log("show db", senders.join(", "));
+  // });
 
   //const firestore = useFirestore();
 
@@ -190,7 +205,7 @@ const Todos = (props) => {
   // };
   // useFirestoreConnect({
   //   collection: "senders",
-  //doc: "KNuZBcE97m1r5lreDcSi",
+  //   doc: "KNuZBcE97m1r5lreDcSi",
   //   where: [["currentUser", "==", "0"]],
   // });
   const firestore = useFirestore();
