@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   todos: [],
+  value: 0,
 };
 // export const userSlice = createSlice({
 //   name: "senders",
@@ -18,6 +19,22 @@ const initialState = {
 //     },
 //   },
 // });
+export const counterSlice = createSlice({
+  name: "counter",
+  initialState,
+  count: 0,
+  reducers: {
+    increment: (state) => {
+      state.value += Number;
+    },
+    decrement: (state) => {
+      state.value -= Number;
+    },
+    incrementByAmount: (state, action) => {
+      state.value += action.payload;
+    },
+  },
+});
 
 const addTodoReducer = createSlice({
   name: "todos",
@@ -59,5 +76,7 @@ const addTodoReducer = createSlice({
 //export const { login, logout } = userSlice.actions;
 //export const selectUser = (state) => state.user.user;
 //export default userSlice.reducer;
+export const { evenCalculator } = counterSlice.actions;
+export default counterSlice.reducer;
 export const { addTodos, removeTodos, updateTodos } = addTodoReducer.actions;
 export const reducer = addTodoReducer.reducer;

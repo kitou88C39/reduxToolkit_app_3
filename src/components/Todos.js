@@ -156,19 +156,17 @@ const Todos = (props) => {
   //   });
   // }, []);
   //追加したコード⑧
+  const firestore = useFirestore();
   useEffect(() => {
     console.log(("show db", db));
-    const q = query(
-      collection(db, "senders")
-      //where("currentUser", "==", "0")
-    );
+    const q = query(collection(db, "senders"), where("currentUser", "==", "0"));
     console.log(("show db", db));
     const unsub = onSnapshot(q, (querySnapshot) => {
-      console.log(
-        "senders",
-        querySnapshot.map((doc) => doc.data())
-        //querySnapshot.map((doc) => ({ ...doc.data(), id: doc.id }))
-      );
+      // console.log(
+      //   "senders",
+      querySnapshot.forEach((doc) => doc.data());
+      //querySnapshot.map((doc) => ({ ...doc.data(), id: doc.id }))
+      // );
     });
     return unsub;
   }, []);
@@ -208,7 +206,7 @@ const Todos = (props) => {
   //   doc: "KNuZBcE97m1r5lreDcSi",
   //   where: [["currentUser", "==", "0"]],
   // });
-  const firestore = useFirestore();
+  //const firestore = useFirestore();
 
   const addTodo = () => {
     return firestore.add("addTodo", {
