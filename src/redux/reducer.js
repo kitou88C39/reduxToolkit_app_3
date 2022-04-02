@@ -1,8 +1,9 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { updateCurrentUser } from "@firebase/auth";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 const initialState = {
   todos: [],
-  value: 0,
+  senders: [],
 };
 // export const userSlice = createSlice({
 //   name: "senders",
@@ -19,19 +20,52 @@ const initialState = {
 //     },
 //   },
 // });
+//追加したコード①
+// const senderReducer = createSlice({
+//   name: "senders",
+//   initialState,
+//   count: 0,
+//   reducers: {
+//     increment: (state) => {
+//       state.value++;
+//     },
+//     decrement: (state) => {
+//       state.value--;
+//     },
+//     incrementByAmount: (state, action) => {
+//       state.value += action.payload;
+//     },
+//   },
+// });
+//追加したコード②
+// const senderSlice = createSlice({
+//   name: "currentUser",
+//   initialState,
+//   count: 0,
+//   reducers: {
+//     increment(state) {
+//       state.value++;
+//     },
+//     decrement(state) {
+//       state.value--;
+//     },
+// incrementByAmount(state, action) {
+//   state.value += action.payload;
+// },
+//   },
+// });
+//追加したコード③
 export const counterSlice = createSlice({
-  name: "counter",
-  initialState,
-  count: 0,
+  name: "senders",
+  initialState: {
+    count: 0,
+  },
   reducers: {
-    increment: (state) => {
-      state.value += Number;
+    Increment: (state) => {
+      state.count += Number;
     },
-    decrement: (state) => {
-      state.value -= Number;
-    },
-    incrementByAmount: (state, action) => {
-      state.value += action.payload;
+    Decrement: (state) => {
+      state.count -= Number;
     },
   },
 });
@@ -76,7 +110,15 @@ const addTodoReducer = createSlice({
 //export const { login, logout } = userSlice.actions;
 //export const selectUser = (state) => state.user.user;
 //export default userSlice.reducer;
-export const { evenCalculator } = counterSlice.actions;
+//追加したコード①
+//export const { increment, decrement } = senderReducer.actions;
+//export const reducer = senderReducer.reducer;
+
+//追加したコード②
+//export const { increment, decrement } = senderSlice.actions;
+//export default senderSlice.reducer;
+export const { increase, decrease } = counterSlice.actions;
 export default counterSlice.reducer;
+
 export const { addTodos, removeTodos, updateTodos } = addTodoReducer.actions;
 export const reducer = addTodoReducer.reducer;

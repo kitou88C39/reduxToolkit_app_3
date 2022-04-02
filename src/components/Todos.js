@@ -11,6 +11,7 @@ import {
   collection,
   query,
   where,
+  data,
   //onSnapshot,
 } from "firebase/firestore";
 //import { collection } from "firebase/firestore";
@@ -158,13 +159,15 @@ const Todos = (props) => {
   //追加したコード⑧
   const firestore = useFirestore();
   useEffect(() => {
-    console.log(("show db", db));
+    //console.log(("show db", db));
     const q = query(collection(db, "senders"), where("currentUser", "==", "0"));
-    console.log(("show db", db));
+    //console.log(("show db", db));
     const unsub = onSnapshot(q, (querySnapshot) => {
       // console.log(
       //   "senders",
       querySnapshot.forEach((doc) => doc.data());
+      //console.log(("show db", db));
+      console.log(("show data", data));
       //querySnapshot.map((doc) => ({ ...doc.data(), id: doc.id }))
       // );
     });
