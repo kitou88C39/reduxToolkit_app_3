@@ -1,5 +1,7 @@
-import { updateCurrentUser } from "@firebase/auth";
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+//import { updateCurrentUser } from "@firebase/auth";
+//import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+
+import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   todos: [],
@@ -61,11 +63,16 @@ export const counterSlice = createSlice({
     count: 0,
   },
   reducers: {
-    Increment: (state) => {
-      state.count += Number;
+    increment: (state) => {
+      //state.count += Number;
+      state.count++;
     },
-    Decrement: (state) => {
-      state.count -= Number;
+    decrement: (state) => {
+      //state.count -= Number;
+      state.count--;
+    },
+    incrementByAmount: (state, action) => {
+      state.value += action.payload;
     },
   },
 });
@@ -117,7 +124,7 @@ const addTodoReducer = createSlice({
 //追加したコード②
 //export const { increment, decrement } = senderSlice.actions;
 //export default senderSlice.reducer;
-export const { increase, decrease } = counterSlice.actions;
+export const { increment, decrement, incrementByAmount } = counterSlice.actions;
 export default counterSlice.reducer;
 
 export const { addTodos, removeTodos, updateTodos } = addTodoReducer.actions;

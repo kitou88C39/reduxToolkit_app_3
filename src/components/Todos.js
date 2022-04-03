@@ -11,7 +11,8 @@ import {
   collection,
   query,
   where,
-  data,
+  //getDocs,
+  //data,
   //onSnapshot,
 } from "firebase/firestore";
 //import { collection } from "firebase/firestore";
@@ -56,24 +57,20 @@ const Todos = (props) => {
   const onCountDown = () => {
     setCount(count - num);
   };
-  // イメージ (someReducerはaddTodosなどのReducerのイメージ)
-  //import { soemReducer } from '../redux/reducer'
-
-  //const db = getFirestore();
-  //const snapshot = await getDocs(collection(db, "senders"));
-  //snapshot.forEach((doc) => {
-  //dispatch(addTodos(doc.data()));
-  //});
 
   //追加したコード①
-  //const [senders, setSenders] = useState([]);
-  // useEffect(
-  //   () =>
-  //     onSnapshot(collection(db, "senders"), (snapshot) =>
-  //       setSenders(snapshot.docs.map((doc) => doc.data()))
-  //     ),
-  //   []
-  // );
+  const firestore = useFirestore();
+  useEffect(() => {
+    //const q = query(collection(db, "senders"), where("currentUser", "==", "0"));
+    const q = query(collection(db, "senders"));
+    const unsub = onSnapshot(q, (querySnapshot) => {
+      querySnapshot.forEach((doc) => {
+        const data = doc.data();
+        console.log("data", data);
+      });
+      return unsub;
+    });
+  });
   //追加したコード②
 
   // useEffect(() => {
@@ -157,22 +154,17 @@ const Todos = (props) => {
   //   });
   // }, []);
   //追加したコード⑧
-  const firestore = useFirestore();
-  useEffect(() => {
-    //console.log(("show db", db));
-    const q = query(collection(db, "senders"), where("currentUser", "==", "0"));
-    //console.log(("show db", db));
-    const unsub = onSnapshot(q, (querySnapshot) => {
-      // console.log(
-      //   "senders",
-      querySnapshot.forEach((doc) => doc.data());
-      //console.log(("show db", db));
-      console.log(("show data", data));
-      //querySnapshot.map((doc) => ({ ...doc.data(), id: doc.id }))
-      // );
-    });
-    return unsub;
-  }, []);
+  // const firestore = useFirestore();
+  // useEffect(() => {
+  //   //console.log(("show db", db));
+  //   const q = query(collection(db, "senders"), where("currentUser", "==", "0"));
+  //   //console.log(("show db", db));
+  //   const unsub = onSnapshot(q, (querySnapshot) => {
+  //     //console.log(("show data", data));
+  //     querySnapshot.forEach((doc) => doc.data());
+  //   });
+  //   return unsub;
+  // }, []);
 
   //追加したコード⑨
   // const q = query(collection(db, "senders"), where("currentUser", "==", "0"));
@@ -184,8 +176,18 @@ const Todos = (props) => {
   //   console.log("show db", senders.join(", "));
   // });
 
-  //const firestore = useFirestore();
-
+  //追加したコード⑩
+  // const firestore = useFirestore();
+  // useEffect(() => {
+  //   console.log(("show db", db));
+  //   const countData = collection(db, "senders");
+  //   getDocs(countData).then((snapshot) => {
+  //     console.log(snapshot.doc.forEach((doc) => doc.data()));
+  //   });
+  // }, []);
+  //追加したコード⑪
+  // const firestore = useFirestore();
+  // console.log(("show db", db));
   // const onCountUp = () => {
   //   setCount(count + num);
   //   return firestore.add("senders", {
@@ -209,6 +211,7 @@ const Todos = (props) => {
   //   doc: "KNuZBcE97m1r5lreDcSi",
   //   where: [["currentUser", "==", "0"]],
   // });
+
   //const firestore = useFirestore();
 
   const addTodo = () => {
@@ -298,7 +301,7 @@ const Todos = (props) => {
           </Button>
           <br />
           <h2>受取人名</h2>
-        </div>{" "}
+        </div>
       </div>
     </>
   );
