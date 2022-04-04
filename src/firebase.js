@@ -1,5 +1,6 @@
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
+//Firebase初期化 (getFirestore)
 import { getFirestore } from "firebase/firestore";
 
 //import { getFirestore, collection, getDocs } from "firebase/firestore";
@@ -18,5 +19,5 @@ const firebaseConfig = {
 export const firebaseApp = initializeApp(firebaseConfig);
 export const auth = getAuth(firebaseApp);
 export const db = getFirestore(firebaseApp);
-//export const database = getFirestore(firebaseApp);
+//Firebase初期化 (getFirestore)
 export const firestore = getFirestore(firebaseApp);

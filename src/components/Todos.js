@@ -10,21 +10,10 @@ import {
   onSnapshot,
   collection,
   query,
-  where,
+  //where,
   //getDocs,
   //data,
-  //onSnapshot,
 } from "firebase/firestore";
-//import { collection } from "firebase/firestore";
-//import { database } from "../firebase";
-
-//import { firestore } from "../firebase";
-//import { collection, getDocs } from "firebase/firestore";
-//import { addDoc, collection } from "firebase/firestore";
-//import { doc, onSnapshot } from "firebase/firestore";
-//import { getFirestore, collection } from "firebase/firestore";
-//import { getDoc, addDoc, updateDoc } from "firebase/firestore";
-//import { getDocument, getCollection } from "~/plugins/firebase";
 
 const mapStateToProps = (state) => {
   return {
@@ -58,7 +47,7 @@ const Todos = (props) => {
     setCount(count - num);
   };
 
-  //追加したコード①
+  //追加したコード① Firebaseに接続しデータ取得 (onSnapshot)
   const firestore = useFirestore();
   useEffect(() => {
     //const q = query(collection(db, "senders"), where("currentUser", "==", "0"));
@@ -72,7 +61,6 @@ const Todos = (props) => {
     });
   });
   //追加したコード②
-
   // useEffect(() => {
   //   console.log(("show db", db));
   //   collection(db, "senders");

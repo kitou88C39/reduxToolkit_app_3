@@ -57,19 +57,19 @@ const initialState = {
 //   },
 // });
 //追加したコード③
-export const counterSlice = createSlice({
+export const senderSlice = createSlice({
   name: "senders",
   initialState: {
     count: 0,
   },
   reducers: {
     increment: (state) => {
-      //state.count += Number;
-      state.count++;
+      state.count += Number;
+      //state.count++;
     },
     decrement: (state) => {
-      //state.count -= Number;
-      state.count--;
+      state.count -= Number;
+      //state.count--;
     },
     incrementByAmount: (state, action) => {
       state.value += action.payload;
@@ -122,10 +122,8 @@ const addTodoReducer = createSlice({
 //export const reducer = senderReducer.reducer;
 
 //追加したコード②
-//export const { increment, decrement } = senderSlice.actions;
-//export default senderSlice.reducer;
-export const { increment, decrement, incrementByAmount } = counterSlice.actions;
-export default counterSlice.reducer;
+export const { increment, decrement, incrementByAmount } = senderSlice.actions;
+export default senderSlice.reducer;
 
 export const { addTodos, removeTodos, updateTodos } = addTodoReducer.actions;
 export const reducer = addTodoReducer.reducer;
