@@ -60,6 +60,7 @@ const Todos = (props) => {
       return unsub;
     });
   });
+
   //追加したコード②
   // useEffect(() => {
   //   console.log(("show db", db));

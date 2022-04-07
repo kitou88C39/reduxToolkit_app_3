@@ -7,72 +7,96 @@ const initialState = {
   todos: [],
   senders: [],
 };
-// export const userSlice = createSlice({
-//   name: "senders",
-//   initialState: {
-//     count: 0,
-//     user: null,
-//   },
-//   reducers: {
-//     login: (state, action) => {
-//       state.user = action.payload;
-//     },
-//     logout: (state) => {
-//       state.user = null;
-//     },
-//   },
-// });
+
 //追加したコード①
-// const senderReducer = createSlice({
+// export const senderSlice = createSlice({
 //   name: "senders",
 //   initialState,
 //   count: 0,
 //   reducers: {
+//     increment: (state, { payload }) => {
+//       state.count = payload;
+//     },
+//     decrement: (state, { payload }) => {
+//       state.count = payload;
+//     },
+// incrementByAmount: (state, action) => {
+//   state.value += action.payload;
+// },
+//   },
+// });
+//追加したコード②
+// const initialStateValues = {
+//   senders: [],
+//   count: 0,
+// };
+// export const senderSlice = createSlice({
+//   name: "senders",
+//   initialState: initialStateValues,
+//   count: 0,
+//   reducers: {
 //     increment: (state) => {
-//       state.value++;
+//       state.count += Number;
 //     },
 //     decrement: (state) => {
-//       state.value--;
+//       state.count -= Number;
+//     },
+//     incrementByAmount: (state, action) => {
+//       state.count += action.payload;
+//     },
+//     decrementByAmount: (state, action) => {
+//       state.count -= action.payload;
+//     },
+//   },
+// });
+//追加したコード③
+// export const senderSlice = createSlice({
+//   name: "senders",
+//   initialState: {
+//     count: 0,
+//   },
+//   reducers: {
+//     increment: (state, action) => {
+//       state.count += Number;
+//       //state.count++;
+//     },
+//     decrement: (state, action) => {
+//       state.count -= Number;
+//       //state.count--;
 //     },
 //     incrementByAmount: (state, action) => {
 //       state.value += action.payload;
 //     },
 //   },
 // });
-//追加したコード②
-// const senderSlice = createSlice({
-//   name: "currentUser",
-//   initialState,
-//   count: 0,
-//   reducers: {
-//     increment(state) {
-//       state.value++;
-//     },
-//     decrement(state) {
-//       state.value--;
-//     },
-// incrementByAmount(state, action) {
-//   state.value += action.payload;
-// },
-//   },
-// });
-//追加したコード③
+//追加したコード④  // some function
 export const senderSlice = createSlice({
   name: "senders",
   initialState: {
     count: 0,
   },
   reducers: {
-    increment: (state) => {
-      state.count += Number;
-      //state.count++;
+    setCount: (state, action) => {
+      //console.log("action", action);
+      //state.count = action.payload;
+      return {
+        ...state,
+        todos: [...state.todos, action.payload],
+      };
     },
-    decrement: (state) => {
-      state.count -= Number;
-      //state.count--;
-    },
-    incrementByAmount: (state, action) => {
-      state.value += action.payload;
+    updateCount: (state, action) => {
+      return {
+        ...state,
+        senders: state?.senders?.map((todo) => {
+          if (todo.id === action.payload.id) {
+            return {
+              ...todo,
+              count: action.payload.count,
+            };
+          }
+          return todo;
+        }),
+      };
     },
   },
 });
@@ -122,7 +146,8 @@ const addTodoReducer = createSlice({
 //export const reducer = senderReducer.reducer;
 
 //追加したコード②
-export const { increment, decrement, incrementByAmount } = senderSlice.actions;
+export const { increment, decrement, incrementByAmount, decrementByAmount } =
+  senderSlice.actions;
 export default senderSlice.reducer;
 
 export const { addTodos, removeTodos, updateTodos } = addTodoReducer.actions;
