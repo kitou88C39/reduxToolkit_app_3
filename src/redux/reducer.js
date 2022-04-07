@@ -81,20 +81,20 @@ export const senderSlice = createSlice({
       //state.count = action.payload;
       return {
         ...state,
-        todos: [...state.todos, action.payload],
+        senders: [...state.senders, action.payload],
       };
     },
     updateCount: (state, action) => {
       return {
         ...state,
-        senders: state?.senders?.map((todo) => {
-          if (todo.id === action.payload.id) {
+        senders: state?.senders?.map((count) => {
+          if (count.id === action.payload.id) {
             return {
-              ...todo,
+              ...count,
               count: action.payload.count,
             };
           }
-          return todo;
+          return count;
         }),
       };
     },
