@@ -146,7 +146,8 @@ const addTodoReducer = createSlice({
 
 //追加したコード②
 export const { setCount, updateCount } = senderSlice.actions;
-export default senderSlice.reducer;
+//export default senderSlice.reducer;
+export const senderReducer = senderSlice.reducer;
 
 export const { addTodos, removeTodos, updateTodos } = addTodoReducer.actions;
 export const reducer = addTodoReducer.reducer;
