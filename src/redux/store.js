@@ -3,7 +3,9 @@ import { configureStore } from "@reduxjs/toolkit";
 import { senderReducer, reducer } from "./reducer";
 
 const store = configureStore({
+  //reducer: { senderReducer, reducer },
   // some function
-  reducer: { senderReducer, reducer },
+  senders: senderReducer,
+  todos: reducer,
 });
 export default store;
