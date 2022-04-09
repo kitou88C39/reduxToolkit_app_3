@@ -137,16 +137,14 @@ const addTodoReducer = createSlice({
     },
   },
 });
-//export const { login, logout } = userSlice.actions;
-//export const selectUser = (state) => state.user.user;
-//export default userSlice.reducer;
+
 //追加したコード①
 // export const { increment, decrement } = senderReducer.actions;
 // export const reducer = senderReducer.reducer;
 
 //追加したコード②
 export const { setCount, updateCount } = senderSlice.actions;
-//export default senderSlice.reducer;
+// some function
 export const senderReducer = senderSlice.reducer;
 
 export const { addTodos, removeTodos, updateTodos } = addTodoReducer.actions;
