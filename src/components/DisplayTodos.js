@@ -8,6 +8,7 @@ import { addTodos, removeTodos, updateTodos } from "../redux/reducer";
 import TodoItem from "./TodoItem";
 
 const mapStateToProps = (state) => {
+  console.log("state: ", state);
   return {
     todos: state?.todos,
   };
