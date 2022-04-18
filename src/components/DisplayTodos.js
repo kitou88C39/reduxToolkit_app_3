@@ -4,8 +4,23 @@
 //balance 受取人の残高
 import React, { useState } from "react";
 import { connect } from "react-redux";
-import { addTodos, removeTodos, updateTodos } from "../redux/reducer";
+import {
+  addTodos,
+  removeTodos,
+  updateTodos,
+  //addSenders,
+} from "../redux/reducer";
 import TodoItem from "./TodoItem";
+
+//Added source code①
+import { useSelector } from "react-redux";
+import { useFirestoreConnect } from "react-redux-firebase";
+
+//Added source code①
+export default function addTodo() {
+  useFirestoreConnect(['addTodo']) 
+  const todos = useSelector((state) => state.firestore.data.todos)
+  
 
 const mapStateToProps = (state) => {
   console.log("state: ", state);
@@ -16,6 +31,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
+    //addSenders: (obj) => dispatch(addSenders(obj)),
     addTodo: (obj) => dispatch(addTodos(obj)),
     removeTodo: (id) => dispatch(removeTodos(id)),
     updateTodo: (obj) => dispatch(updateTodos(obj)),

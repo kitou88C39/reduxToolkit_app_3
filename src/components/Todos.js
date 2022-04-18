@@ -50,7 +50,6 @@ const Todos = (props) => {
   //追加したコード① Firebaseに接続しデータ取得 (onSnapshot)
   const firestore = useFirestore();
   useEffect(() => {
-    //const q = query(collection(db, "senders"), where("currentUser", "==", "0"));
     const q = query(collection(db, "senders"));
     const unsub = onSnapshot(q, (querySnapshot) => {
       querySnapshot.forEach((doc) => {

@@ -159,7 +159,6 @@
 // export const { addTodos, removeTodos, updateTodos } = addTodoReducer.actions;
 // export const reducer = addTodoReducer.reducer;
 
-//実装前
 import { createSlice } from "@reduxjs/toolkit";
 export const counterSlice = createSlice({
   name: "counter",
@@ -167,19 +166,20 @@ export const counterSlice = createSlice({
     value: 0,
   },
   reducers: {
-    increment: (state) => {
-      state.value += 1;
+    onCountUp: (state) => {
+      state.value += Number;
     },
-    decrement: (state) => {
-      state.value -= 1;
+    onCountDown: (state) => {
+      state.value -= Number;
     },
   },
 });
-export const { increment, decrement } = counterSlice.actions;
+export const { onCountUp, onCountDown } = counterSlice.actions;
 export default counterSlice.reducer;
 
 const initialState = {
   todos: [],
+  senders: [],
 };
 
 const addTodoReducer = createSlice({
@@ -187,6 +187,13 @@ const addTodoReducer = createSlice({
   initialState,
   reducers: {
     //ここでは、reducerを書く
+    //追加したコード③
+    addSenders: (state, action) => {
+      return {
+        ...state,
+        senders: [...state.senders, action.payload],
+      };
+    },
     //todoを追加
     addTodos: (state, action) => {
       return {
@@ -219,5 +226,6 @@ const addTodoReducer = createSlice({
   },
 });
 
-export const { addTodos, removeTodos, updateTodos } = addTodoReducer.actions;
+export const { addSenders, addTodos, removeTodos, updateTodos } =
+  addTodoReducer.actions;
 export const reducer = addTodoReducer.reducer;
