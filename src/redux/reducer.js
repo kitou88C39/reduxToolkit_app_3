@@ -159,17 +159,23 @@
 // export const { addTodos, removeTodos, updateTodos } = addTodoReducer.actions;
 // export const reducer = addTodoReducer.reducer;
 
+//Added source code②
+
+//import firebase from "firebase/compat/index";
+//import "firebase/compat/auth";
+//import "firebase/compat/firestore";
 import { createSlice } from "@reduxjs/toolkit";
+
 export const counterSlice = createSlice({
   name: "counter",
   initialState: {
     value: 0,
   },
   reducers: {
-    onCountUp: (state) => {
+    onCountUp: (state, action) => {
       state.value += Number;
     },
-    onCountDown: (state) => {
+    onCountDown: (state, action) => {
       state.value -= Number;
     },
   },
@@ -179,7 +185,7 @@ export default counterSlice.reducer;
 
 const initialState = {
   todos: [],
-  senders: [],
+  //senders: [],
 };
 
 const addTodoReducer = createSlice({
@@ -188,12 +194,12 @@ const addTodoReducer = createSlice({
   reducers: {
     //ここでは、reducerを書く
     //追加したコード③
-    addSenders: (state, action) => {
-      return {
-        ...state,
-        senders: [...state.senders, action.payload],
-      };
-    },
+    // addSenders: (state, action) => {
+    //   return {
+    //     ...state,
+    //     senders: [...state.senders, action.payload],
+    //   };
+    // },
     //todoを追加
     addTodos: (state, action) => {
       return {
@@ -226,6 +232,7 @@ const addTodoReducer = createSlice({
   },
 });
 
-export const { addSenders, addTodos, removeTodos, updateTodos } =
-  addTodoReducer.actions;
+export const { addTodos, removeTodos, updateTodos } = addTodoReducer.actions;
+// export const { addSenders, addTodos, removeTodos, updateTodos } =
+//   addTodoReducer.actions;
 export const reducer = addTodoReducer.reducer;

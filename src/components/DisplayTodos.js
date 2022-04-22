@@ -21,8 +21,8 @@ import TodoItem from "./TodoItem";
 //   const todos = useSelector((state) => state.firestore.data.todos)
 
 //Added source code②
-import { compose } from "redux"; // reduxからcomposeをimportする必要があります。
-import { firestoreConnect } from "react-redux-firebase";
+//import { compose } from "redux"; // reduxからcomposeをimportする必要がある。
+//import { firestoreConnect } from "react-redux-firebase";
 
 const mapStateToProps = (state) => {
   console.log("state: ", state);
@@ -96,9 +96,9 @@ const DisplayTodos = (props) => {
   );
 };
 
-//export default connect(mapStateToProps, mapDispatchToProps)(DisplayTodos);
+export default connect(mapStateToProps, mapDispatchToProps)(DisplayTodos);
 //Added source code②
-export default compose(
-  firestoreConnect(() => ["addTodo"]),
-  connect(mapStateToProps, mapDispatchToProps)
-)(DisplayTodos);
+// export default compose(
+//   firestoreConnect(() => ["addTodo"]),
+//   connect(mapStateToProps, mapDispatchToProps)
+// )(DisplayTodos);

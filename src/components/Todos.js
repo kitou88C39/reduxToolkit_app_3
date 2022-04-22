@@ -174,7 +174,7 @@ const Todos = (props) => {
   //   });
   // }, []);
   //追加したコード⑪
-  // const firestore = useFirestore();
+  //const firestore = useFirestore();
   // console.log(("show db", db));
   // const onCountUp = () => {
   //   setCount(count + num);
